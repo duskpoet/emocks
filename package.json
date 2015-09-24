@@ -1,0 +1,24 @@
+{
+  "name": "emocks",
+  "version": "0.0.1",
+  "description": "Mock server based on expressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/duskpoet/emocks.git"
+  },
+  "keywords": [
+    "mock",
+    "javascript",
+    "rest"
+  ],
+  "author": "Eduard Dyckman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duskpoet/emocks/issues"
+  },
+  "homepage": "https://github.com/duskpoet/emocks#readme"
+}
