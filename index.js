@@ -16,7 +16,7 @@ module.exports = function(root, options){
     }
 
     function bindProcessors(paths){
-        var currentPath = path.join(__dirname, root, paths.join('/'));
+        var currentPath = path.join(root, paths.join('/'));
         fs.readdirSync(currentPath).forEach(function(dir){
             var currentPathFile = path.join(currentPath, dir);
             var stat = fs.statSync(currentPathFile);
