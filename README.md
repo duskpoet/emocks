@@ -63,6 +63,17 @@ Response
 { "id": 2, "name": "Arya Stark", "state": "Sees nothing" }
 ```
 
+### Options
+```javascript
+/**
+ * @param {string} path - absolute path to mocks directory
+ * @param {object} options
+ * @param {number} options.delay - emulate server response delay
+ */
+emocks(path.join(__dirname, './path/to/mocks-folder'), {
+    delay: 1000
+});
+
 ## Additional info
 Please offer suggestions via issues.
 emocks is an abbreviation for express mocks. Any similarity to emacs is unintended.
