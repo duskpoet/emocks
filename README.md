@@ -70,9 +70,11 @@ Response
  * @param {string} path - absolute path to mocks directory
  * @param {object} options
  * @param {number} options.delay - emulate server response delay
+ * @param {Function} options.404 - assign custom 'Not Found' handler
  */
 emocks(path.join(__dirname, './path/to/mocks-folder'), {
-    delay: 1000
+    delay: 1000,
+    404: function(req, res){ ... }
 });
 ```
 

@@ -40,8 +40,9 @@ module.exports = function(root, options){
         });
     }
     bindProcessors(['']);
-    router.use(function(req, res){
+    var cb404 =  options['404'] || function(req, res){
         res.status(404).json({ error: 'Mock not found' });
-    });
+    };
+    router.use(cb404);
     return router;
 };

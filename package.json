@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/duskpoet/emocks/issues"
   },
-  "homepage": "https://github.com/duskpoet/emocks#readme"
+  "homepage": "https://github.com/duskpoet/emocks#readme",
+  "devDependencies": {
+    "express": "^4.13.3"
+  },
+  "dependencies": {
+    "fs-extra": "^0.24.0"
+  }
 }
