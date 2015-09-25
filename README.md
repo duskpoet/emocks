@@ -73,6 +73,7 @@ Response
 emocks(path.join(__dirname, './path/to/mocks-folder'), {
     delay: 1000
 });
+```
 
 ## Additional info
 Please offer suggestions via issues.
