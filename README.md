@@ -5,6 +5,7 @@ emocks is a mocking middleware for express servers.
 * Organize all your mocks using folder structure, that will correspond your api url. 
 * You can use HTTP VERBS as file names to create different mocks
 * You can use static .json files for your answers or .js modules, that can create dynamic answers
+
 ## Installation
     npm install emocks
 ## Example
