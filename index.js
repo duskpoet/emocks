@@ -4,10 +4,18 @@ var express = require('express');
 var fs = require('fs-extra');
 var path = require('path');
 
+var HEADERS_EXT = '.headers';
 module.exports = function(root, options){
     if (options == null) options = {};
 
     var router = express.Router();
+
+    if(options.headers){
+      router.use(function(req, res, next){
+        res.set(options.headers);
+        next();
+      });
+    }
 
     if(options.delay){
         router.use(function(req, res, next){
@@ -26,8 +34,14 @@ module.exports = function(root, options){
                 var parsed = path.parse(dir);
                 switch(parsed.ext){
                     case '.json':
-                        var respCb = function(req, resp){
-                            resp.sendFile(currentPathFile);   
+                        var headersFile = path.join(currentPath, parsed.name + HEADERS_EXT);
+                        var headers = fs.readJsonSync(headersFile, { throws: false });
+
+                        var respCb = function(req, res){
+                          if(headers){
+                            res.set(headers);
+                          }
+                          res.sendFile(currentPathFile);   
                         };
                         router[parsed.name.toLowerCase()](paths.join('/'), respCb);
                         break;

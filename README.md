@@ -6,6 +6,9 @@ emocks is a mocking middleware for express servers.
 * You can use HTTP VERBS as file names to create different mocks
 * You can use static .json files for your answers or .js modules, that can create dynamic answers
 
+## Supported features
+* json, dynamic answers
+* custom headers
 ## Installation
     npm install emocks
 ## Example
@@ -37,6 +40,10 @@ app.listen(3000);
   { "id": 2, "name": "Arya Stark", "state": "Knows valar morghulis" }
 ]
 ```
+### mocks/users/GET.headers
+```JSON
+{ "X-Password": "The winter is coming" }
+```
 ### mocks/users/PUT.js
 ```javascript
 module.exports = function(req, res){
@@ -49,6 +56,11 @@ module.exports = function(req, res){
 `GET /users`
 
 Response
+
+```
+HTTP/1.1 200 OK
+X-Password: The winter is coming
+```
 ```JSON
 [ 
   { "id": 1, "name": "Jon Snow", "state": "Knows nothing" },
@@ -73,8 +85,10 @@ Response
 emocks(path.join(__dirname, './path/to/mocks-folder'), {
     //emulate server response delay
     delay: 1000,
-    //assign custom 'Not Found' handler
-    404: function(req, res){ ... }
+    //custom 'Not Found' handler
+    404: function(req, res){ ... },
+    //global headers, will be applied to every reponse
+    headers: { "X-Custom-Global-Header": "Hello!" }
 });
 ```
 
