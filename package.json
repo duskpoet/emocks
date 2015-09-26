@@ -4,7 +4,7 @@
   "description": "Mock server based on expressjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/duskpoet/emocks#readme",
   "devDependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "istanbul": "^0.3.21",
+    "mocha": "^2.3.3",
+    "supertest": "^1.1.0"
   },
   "dependencies": {
     "fs-extra": "^0.24.0"
