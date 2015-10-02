@@ -31,7 +31,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 app.use(bodyParser.json());
-app.use('/', emocks(path.join(__dirname, './mocks'));
+app.use('/', emocks(path.join(__dirname, './mocks')));
 app.listen(3000);
 ```
 ### mocks/users/GET.json
