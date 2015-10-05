@@ -34,6 +34,7 @@ module.exports = function(root, options){
                 var parsed = path.parse(dir);
                 switch(parsed.ext){
                     case '.json':
+                    case '.xml':
                         var headersFile = path.join(currentPath, parsed.name + HEADERS_EXT);
                         var headers = fs.readJsonSync(headersFile, { throws: false });
 
@@ -43,7 +44,12 @@ module.exports = function(root, options){
                           }
                           res.sendFile(currentPathFile);   
                         };
-                        router[parsed.name.toLowerCase()](paths.join('/'), respCb);
+                        var route = paths.join('/');
+                        var routes = [route + parsed.ext];
+                        if(parsed.ext === '.json'){
+                            routes.push(route);
+                        }
+                        router[parsed.name.toLowerCase()](routes, respCb);
                         break;
                     case '.js': 
                         var cb = require(currentPathFile);
