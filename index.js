@@ -37,7 +37,13 @@ module.exports = function(root, options){
                     case '.xml':
                     {
                         var headersFile = path.join(currentPath, parsed.name + HEADERS_EXT);
-                        var headers = fs.readJsonSync(headersFile, { throws: false });
+                        var headers;
+                        try {
+                            headers = fs.readJsonSync(headersFile);
+                        }
+                        catch(ex) {
+                            headers = null;
+                        }
 
                         var respCb = function(req, res){
                           if(headers){
