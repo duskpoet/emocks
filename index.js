@@ -63,6 +63,7 @@ module.exports = function(root, options){
                     case '.js': 
                     {
                         var cb = function emocksHandle(){
+                            delete require.cache[require.resolve(currentPathFile)];
                             require(currentPathFile).apply(this, arguments);
                         };
                         let route = paths.join('/');
@@ -86,11 +87,8 @@ module.exports = function(root, options){
 
     if (options.watch) {
         fs.watch(root, { recursive: true }, _.debounce(function(event, filename) {
-            console.log(event, filename);
-            console.log('stack before', router.stack.length);
             router.stack.splice(2);
             bindAll();
-            console.log('stack after', router.stack.length);
         }));
     }
 
