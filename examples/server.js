@@ -10,7 +10,8 @@ app.use('/', emocks(path.join(__dirname, './mocks'), {
     },
     headers: {
       'X-Header': 'test'
-    }
+    },
+    watch: true
 }));
 var server = app.listen(3000, function(){
   console.log('Mocking server started on port ' + server.address().port);

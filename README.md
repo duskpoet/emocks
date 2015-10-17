@@ -88,8 +88,10 @@ emocks(path.join(__dirname, './path/to/mocks-folder'), {
     delay: 1000,
     //custom 'Not Found' handler
     404: function(req, res){ ... },
-    //global headers, will be applied to every reponse
-    headers: { "X-Custom-Global-Header": "Hello!" }
+    //global headers, will be applied to every response
+    headers: { "X-Custom-Global-Header": "Hello!" },
+    //rebind mocks on file changes
+    watch: true
 });
 ```
 

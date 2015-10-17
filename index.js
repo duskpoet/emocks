@@ -3,6 +3,7 @@
 var express = require('express');
 var fs = require('fs-extra');
 var path = require('path');
+var _ = require('lodash');
 
 var HEADERS_EXT = '.headers';
 module.exports = function(root, options){
@@ -45,7 +46,7 @@ module.exports = function(root, options){
                             headers = null;
                         }
 
-                        var respCb = function(req, res){
+                        var respCb = function emocksHandle(req, res){
                           if(headers){
                             res.set(headers);
                           }
@@ -61,7 +62,9 @@ module.exports = function(root, options){
                     }
                     case '.js': 
                     {
-                        var cb = require(currentPathFile);
+                        var cb = function emocksHandle(){
+                            require(currentPathFile).apply(this, arguments);
+                        };
                         let route = paths.join('/');
                         let routes = [route, route + '.json'];
                         router[parsed.name.toLowerCase()](routes, cb);
@@ -71,10 +74,25 @@ module.exports = function(root, options){
             }
         });
     }
-    bindProcessors(['']);
-    var cb404 =  options['404'] || function(req, res){
-        res.status(404).json({ error: 'Mock not found' });
-    };
-    router.use(cb404);
+    function bindAll() {
+        bindProcessors(['']);
+        var cb404 =  options['404'] || function(req, res){
+            res.status(404).json({ error: 'Mock not found' });
+        };
+        router.use(cb404);
+    }
+
+    bindAll();
+
+    if (options.watch) {
+        fs.watch(root, { recursive: true }, _.debounce(function(event, filename) {
+            console.log(event, filename);
+            console.log('stack before', router.stack.length);
+            router.stack.splice(2);
+            bindAll();
+            console.log('stack after', router.stack.length);
+        }));
+    }
+
     return router;
 };
