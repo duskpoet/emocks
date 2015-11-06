@@ -4,16 +4,17 @@ emocks is a mocking middleware for express servers.
 ## How does it work?
 * Organize all your mocks using folder structure, that will correspond your api url. 
 * You can use HTTP VERBS as file names to create different mocks
-* You can use static .json files for your answers or .js modules, that can create dynamic answers
+* You can use static .json files for responses or .js modules, that can create dynamic answers
 
 ## Supported features
 * json, dynamic answers
 * custom headers
+* live update
 
 ## Installation
     npm install emocks
 ## Example
-    Assume we have following folder structure:
+    Assume we have the following folder structure:
 ```
 |-- mocks
   |-- users
