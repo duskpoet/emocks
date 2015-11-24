@@ -24,6 +24,14 @@ module.exports = function(root, options){
         });
     }
 
+    function parseFName(fname) {
+        var arr = fname.split('.');
+        return { 
+            verb: arr[0].toLowerCase(),
+            status: arr[1] ? Number(arr[1]) : null
+        };
+    }
+
     function bindProcessors(paths){
         var currentPath = path.join(root, paths.join('/'));
         fs.readdirSync(currentPath).forEach(function(dir){
@@ -33,6 +41,7 @@ module.exports = function(root, options){
                 bindProcessors(paths.concat([dir]));
             } else {
                 var parsed = path.parse(dir);
+                
                 switch(parsed.ext){
                     case '.json':
                     case '.xml':
@@ -46,9 +55,14 @@ module.exports = function(root, options){
                             headers = null;
                         }
 
+                        var parsedName = parseFName(parsed.name);
+
                         var respCb = function emocksHandle(req, res){
-                          if(headers){
+                          if (headers) {
                             res.set(headers);
+                          }
+                          if (parsedName.status) {
+                              res.status(parsedName.status);
                           }
                           res.sendFile(currentPathFile);   
                         };
@@ -57,7 +71,7 @@ module.exports = function(root, options){
                         if(parsed.ext === '.json'){
                             routes.push(route);
                         }
-                        router[parsed.name.toLowerCase()](routes, respCb);
+                        router[parsedName.verb](routes, respCb);
                         break;
                     }
                     case '.js': 
