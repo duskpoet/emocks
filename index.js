@@ -71,7 +71,9 @@ module.exports = function(root, options){
                         if(parsed.ext === '.json'){
                             routes.push(route);
                         }
-                        router[parsedName.verb](routes, respCb);
+                        if (router[parsedName.verb]) {
+                            router[parsedName.verb](routes, respCb);
+                        }
                         break;
                     }
                     case '.js': 
@@ -82,7 +84,10 @@ module.exports = function(root, options){
                         };
                         let route = paths.join('/');
                         let routes = [route, route + '.json'];
-                        router[parsed.name.toLowerCase()](routes, cb);
+                        let name = parsed.name.toLowerCase();
+                        if (router[name]) {
+                            router[name](routes, cb);
+                        }
                         break;
                     }
                 }
