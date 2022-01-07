@@ -2,19 +2,18 @@
 emocks - express mocks
 emocks is a mocking middleware for express servers.
 ## How does it work?
-* Organize all your mocks using folder structure, that will correspond your api url. 
+* Organize all of your mocks using folder structure, representing your api url
 * You can use HTTP VERBS as file names to create different mocks
 * You can use static .json files for responses or .js modules, that can create dynamic answers
 
 ## Supported features
 * json, dynamic answers
 * custom headers
-* live update
 
 ## Installation
     npm install emocks
 ## Example
-    Assume we have the following folder structure:
+    Assuming we have the following folder structure:
 ```
 |-- mocks
   |-- users
@@ -25,12 +24,12 @@ emocks is a mocking middleware for express servers.
 ```
 ### server.js
 ```javascript
-var path    = require('path');
-var express = require('express');
-var emocks  = require('emocks');
-var bodyParser = require('body-parser');
+const path    = require('path');
+const express = require('express');
+const emocks  = require('emocks');
+const bodyParser = require('body-parser');
 
-var app = express();
+const app = express();
 app.use(bodyParser.json());
 app.use('/', emocks(path.join(__dirname, './mocks')));
 app.listen(3000);
@@ -91,10 +90,10 @@ emocks(path.join(__dirname, './path/to/mocks-folder'), {
     404: function(req, res){ ... },
     //global headers, will be applied to every response
     headers: { "X-Custom-Global-Header": "Hello!" },
-    //rebind mocks on file changes
-    watch: true
 });
 ```
+
+### Now supports typescript!
 
 ## Additional info
 Please offer suggestions via issues.
