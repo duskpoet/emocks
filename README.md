@@ -1,6 +1,8 @@
 # emocks
-emocks - express mocks
 emocks is a mocking middleware for express servers.
+
+<img src="https://github.com/duskpoet/emocks/actions/workflows/node.js.yml/badge.svg">
+
 ## How does it work?
 * Organize all of your mocks using folder structure, representing your api url
 * You can use HTTP VERBS as file names to create different mocks
