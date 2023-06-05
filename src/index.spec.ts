@@ -2,9 +2,12 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import express from "express";
 import request from "supertest";
-import rimraf from "rimraf";
+import { rimraf } from "rimraf";
 
 import emocks, { EmocksOptions } from "./index";
+import {fileURLToPath} from "node:url";
+
+const currentDir = fileURLToPath(new URL('.', import.meta.url))
 
 const MOCKS_PATH = "../examples/mocks";
 
@@ -20,15 +23,15 @@ const promisify = (req: request.Request) =>
   });
 
 describe("Emocks runs", function () {
-  beforeEach(function (done) {
-    fs.mkdir("tmp", done);
+  beforeEach(() => {
+    fs.mkdirSync("tmp");
   });
-  afterEach(function (done) {
-    rimraf("tmp", done);
+  afterEach(async () => {
+    await rimraf("tmp");
   });
   function createApp(
     options?: EmocksOptions,
-    pathPas = path.join(__dirname, MOCKS_PATH)
+    pathPas = path.join(currentDir, MOCKS_PATH)
   ) {
     const app = express();
     app.use("/", emocks(pathPas, options));

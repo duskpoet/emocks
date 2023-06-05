@@ -82,8 +82,7 @@ export default function emocks(root: string, options: EmocksOptions = {}) {
           }
           case ".js": {
             const cb = function emocksHandle() {
-              delete require.cache[require.resolve(currentPathFile)];
-              require(currentPathFile).apply(this, arguments);
+              return import(currentPathFile).then((m) => m.default.apply(this, arguments))
             };
             const route = paths.join("/");
             const routes = [route, route + ".json"];
