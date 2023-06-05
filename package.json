@@ -1,6 +1,6 @@
 {
   "name": "emocks",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Mock server based on expressjs",
   "main": "dist/index.js",
   "scripts": {
