@@ -1,6 +1,6 @@
+import * as path from "node:path";
+import { readdirSync, statSync, readFileSync } from "node:fs";
 import express from "express";
-import * as path from "path";
-import { readdirSync, statSync, readFileSync } from "fs";
 
 const HEADERS_EXT = ".headers";
 
